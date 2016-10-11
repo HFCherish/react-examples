@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>filter product</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type='text/babel'>
+		var CounterButton = React.createClass({
+			handleClick: function() {
+				this.props.onCounterClick();
+			},
+
+			render: function() {
+				return (
+					<button onClick={this.handleClick}>
+						Click me! Number of clicks: {this.props.count}
+					</button>
+				);
+			}
+		});
+
+		var CounterBlock = React.createClass({
+			getInitialState: function() {
+				return ({count: 0});
+			},
+
+			handleCounterClick: function() {
+				this.setState({count: this.state.count + 1});
+			},
+
+			render: function(){
+				return (
+					<CounterButton onCounterClick={this.handleCounterClick} count={this.state.count} />
+				);
+			}
+		});
+
+		ReactDOM.render(
+			<CounterBlock />,
+			document.getElementById('content')
+		);
+    </script>
+  </body>
+</html>
