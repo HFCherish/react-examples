@@ -1,0 +1,23 @@
+{
+	"name": "react-examples-pz",
+	"version": "0.0.0",
+	"private": true,
+	"license": "UNLICENSED",
+	"description": "this is the package where I practice to write react all by myself",
+	"main": "server.js",
+	"dependencies": {
+		"express": "^4.4.5"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"start": "node server.js"
+	},
+	"repository": {
+	    "type": "git",
+	    "url": "git@github.com:HFCherish/react-examples.git"
+	},
+	"author": "Petrina",
+	"engines": {
+		"node": "0.12.x"
+	}
+}
