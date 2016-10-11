@@ -50,20 +50,17 @@ var ProductList = React.createClass({
 });
 
 var SearchBar = React.createClass({
-	handleFilterChange: function(e) {
-		this.props.onFilterChange(e.target.value);
-	},
 
-	handleStockChange: function(e) {
-		this.props.onStockChange(e.target.checked);
+	handleChange: function() {
+		this.props.onSearchChange(this.refs.filterTextInput.value, this.refs.stockInput.checked);
 	},
 
 	render: function() {
 		return (
 			<div>
-				<input type="text" value={this.props.filterText} onChange={this.handleFilterChange} placeholder="input the filter text" />
+				<input type="text" value={this.props.filterText} onChange={this.handleChange} placeholder="input the filter text" ref="filterTextInput" />
 				<p>
-					<input type="checkbox" checked={this.props.isInStock} onChange={this.handleStockChange} />
+					<input type="checkbox" checked={this.props.isInStock} onChange={this.handleChange} ref="stockInput" />
 					{'  '}
 					Only show products in stock.
 				</p>
@@ -77,18 +74,14 @@ var FilterableProductTable = React.createClass({
 		return {filterText:'', isInStock: false};
 	},
 
-	handleStockChange: function(isInStock) {
-		this.setState({isInStock: isInStock});
-	},
-
-	handleFilterChange: function(filterText) {
-		this.setState({filterText: filterText});
+	handleSearchChange: function(filterText, isInStock) {
+		this.setState({filterText: filterText, isInStock: isInStock});
 	},
 
 	render: function() {
 		return (
 			<div>
-				<SearchBar filterText={this.state.filterText} isInStock={this.state.isInStock} onFilterChange={this.handleFilterChange} onStockChange={this.handleStockChange} />
+				<SearchBar filterText={this.state.filterText} isInStock={this.state.isInStock} onSearchChange={this.handleSearchChange} />
 				<ProductList products={this.props.products} filterText={this.state.filterText} isInStock={this.state.isInStock} />
 			</div>
 		);
