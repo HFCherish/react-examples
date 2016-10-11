@@ -12,7 +12,7 @@ var LikeButton = React.createClass({
 		return (
 			<div onClick={this.handleClick}>
 				you {text} this. Click here to toggle.
-			</div>	 
+			</div>	 	
 		);
 	}
 });
