@@ -11,37 +11,25 @@
     <div id="content"></div>
     <script type='text/babel'>
 		var CounterButton = React.createClass({
+			getInitialState: function() {
+				return ({count: 0});
+			},
+
 			handleClick: function() {
-				this.props.onCounterClick();
+				this.setState({count: this.state.count + 1});
 			},
 
 			render: function() {
 				return (
 					<button onClick={this.handleClick}>
-						Click me! Number of clicks: {this.props.count}
+						Click me! Number of clicks: {this.state.count}
 					</button>
 				);
 			}
 		});
 
-		var CounterBlock = React.createClass({
-			getInitialState: function() {
-				return ({count: 0});
-			},
-
-			handleCounterClick: function() {
-				this.setState({count: this.state.count + 1});
-			},
-
-			render: function(){
-				return (
-					<CounterButton onCounterClick={this.handleCounterClick} count={this.state.count} />
-				);
-			}
-		});
-
 		ReactDOM.render(
-			<CounterBlock />,
+			<CounterButton />,
 			document.getElementById('content')
 		);
     </script>
