@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>counter using commonJS</title>
+	</head>
+	<body>
+		<div id='content'></div>
+    <script src="bundle.js"></script>
+		<div>
+			<h2>CommonJS</h2>
+			<p>CommonJS是一套规范，定义了javascript API。其中为了解决javascript模块化的问题，引入require和export</p>
+			<h2>NodeJS</h2>
+			<p>nodeJS是服务器端javascript解释器，从而使得javascript可以脱离浏览器允许，编写后端代码。</p>
+			<h2>npm</h2>
+			<p>npm是nodeJs的包管理器。其实就是一个数据库，存放了所有类似java、c中的库类、库函数，从而可以在nodejs中使用require调用。npm实现了CommonJS规范，是使得nodejs可以存取、调用包的关键</p>
+			<h2>browserify</h2>
+			<p>browserify是使得前端javascript可以使用require的工具。前端javascript同样存在包问题，因此采用CommonJS规范是合理的方案。但browser并不解析require。因此目前需要额外的工具来处理。browserify允许在前端javascript中写require，之后只需运行 <i> browserify yourJS.js -o bundle.js </i>，它就会根据代码中的依赖顺序，将所有的包加载进来，并按顺序组装成一个完整的javascript文件bundle.js。你仅需在html中饮用该bundle.js就可以了</p>
+			<h2>watchify</h2>
+			<p>是辅助browserify的监听工具。如果你修改了yourJS代码，那么watchify会监听到，当你再次运行程序时，它会重新build生成bundle.js</p>
+		</div>
+	</body>
+</html>   
