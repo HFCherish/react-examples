@@ -11,6 +11,10 @@ var Elapsed = React.createClass({
 		this.setState({elapsed: new Date() - this.props.start});
 	},
 
+	componentWillUnmount: function() {
+		clearInterval(this.timer);
+	},
+
 	render: function() {
 		var elapsed = Math.round(this.state.elapsed / 100);
 		elapsed = (elapsed/10).toFixed(1);

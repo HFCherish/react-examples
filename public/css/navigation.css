@@ -1,0 +1,35 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	padding: 60px;
+	text-align: center;
+}
+
+table {
+	display: inline-block;
+}
+
+tr td {
+	cursor: pointer;
+	color: #7B8585;
+	background-color: #eee;
+	display: inline-block;
+	padding: 5px;
+	transition: 0.3s;
+}
+
+tr td:hover {
+	background-color: #beecea;
+}
+
+tr td.selected {
+	color: #fff;
+	background-color: #41c7c2;
+}
+
+p {
+	padding-top: 15px;
+}
