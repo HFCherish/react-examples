@@ -1,28 +1,26 @@
-var Counter = React.createClass({
+var Elapsed = React.createClass({
+	getInitialState: function() {
+		return {elapsed: 0};
+	},
+
+	componentDidMount: function() {
+		this.timer = setInterval(this.tick, 50);
+	},
+
+	tick: function() {
+		this.setState({elapsed: new Date() - this.props.start});
+	},
+
 	render: function() {
-		var elapsed = Math.round(this.props.elapsed / 100);
-		elapsed = elapsed/10 + (elapsed%10? '' : '.0');
+		var elapsed = Math.round(this.state.elapsed / 100);
+		elapsed = (elapsed/10).toFixed(1);
 		return (
-			<div> the time has elapsed for {elapsed} s </div>
+			<p> the examples has started for <em>{elapsed}</em> seconds</p>
 		);
 	}
 });
 
-var start = new Date().getTime();
-
-// setInterval(function() {
-// 	ReactDOM.render(
-// 		<Counter elapsed={new Date().getTime() - start} />,
-// 		document.getElementById('content')
-// 		);
-// }, 50);
-
-//use factory
-var CounterFactory = React.createFactory(Counter);
-
-setInterval(function() {
-	ReactDOM.render(
-		CounterFactory({elapsed: new Date().getTime() - start}),
-		document.getElementById('content')
-		);
-}, 50);
+ReactDOM.render(
+	<Elapsed start={Date.now()} />,
+	document.getElementById('content')
+);
