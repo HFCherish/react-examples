@@ -6,7 +6,7 @@ var SearchBar = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<input value={this.props.searchInput} placeholder='Type here' onChange={this.handleChange} />
+				<input type="text" value={this.props.searchInput} placeholder='Type here' onChange={this.handleChange} />
 			</div>
 		);
 	}
@@ -19,9 +19,9 @@ var WebList = React.createClass({
 			<table>
 				<tbody>
 						{
-							this.props.urls.map(function(website, index) {
+							this.props.urls.map(function(website) {
 								var searchInput = self.props.searchInput.trim().toLowerCase();
-								if( website.name.indexOf(searchInput) >= 0 )
+								if( website.name.toLowerCase().match(searchInput) )
 									return (
 										<tr>
 											<td>{website.name}</td>
