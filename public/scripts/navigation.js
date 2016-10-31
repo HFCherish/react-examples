@@ -12,18 +12,17 @@ var NavigationBar = React.createClass({
 		return (
 			<div>
 				<table>
-					<tr>
-					{
-						this.props.items.map(function(item, index) {
-							var style = '';
-							if( index == self.state.selected )	style = 'selected';
-							
-							return (
-								<td className={style} onClick={self.handleClicked.bind(self, index)}>{item}</td>
-							);
-						})
-					}
-					</tr>
+					<tbody>
+						<tr>
+						{
+							this.props.items.map(function(item, index) {
+								var style = self.state.selected == index ? 'selected' : '';
+								return (
+									<td className={style} onClick={self.handleClicked.bind(self, index)}>{item}</td>);
+							})
+						}
+					</tr>						
+					</tbody>
 				</table>
 				<p>selected: {this.props.items[this.state.selected]}</p>
 			</div>
@@ -31,7 +30,9 @@ var NavigationBar = React.createClass({
 	}
 });
 
+var ITEMS = ['HOME', 'SERVICES', 'CONTACT US', 'ABOUT'];
+
 ReactDOM.render(
-	<NavigationBar items={['home', 'services', 'contact us', 'about']} />,
+	<NavigationBar items={ITEMS} />,
 	document.getElementById('content')
 );
