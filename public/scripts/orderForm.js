@@ -1,27 +1,32 @@
+var OrderItem = React.createClass({
+	getInitialState: function() {
+		return {selected: -1};
+	},
+
+	handleClick: function() {
+		var newSelected = -1 * this.state.selected;
+		this.setState({selected: newSelected});
+		this.props.onOrderClick(newSelected * this.props.item.price);
+	},
+
+	render: function() {
+		var style = this.state.selected > 0 ? "selected" : "";
+		return (
+			<tr className={style} onClick={this.handleClick}>
+				<td>{this.props.item.name}</td>
+				<td>{this.props.cashSign + this.props.item.price.toFixed(2)}</td>
+			</tr>
+		);
+	}
+});
+
 var OrderTable = React.createClass({
 	getInitialState: function() {
-		return {selected: []};
+		return {total: 0.00};
 	},
 
-	calTotal: function() {
-		var total = 0.00;
-		var self = this;
-		this.state.selected.map(function(index) {
-			total += self.props.items[index].price;
-		});
-		return '$' + total.toFixed(2);
-	},
-
-	handleClick: function(index) {
-		var selected = this.state.selected;
-		var selectIndex = selected.indexOf(index);
-		if( selectIndex < 0 ) {
-			selected.push(index);
-		}
-		else { 
-			selected.splice(selectIndex, 1);
-		}
-		this.setState({selected: selected});
+	handleClick: function(newItemPrice) {
+		this.setState({total: (this.state.total + newItemPrice)});
 	}, 
 
 	render: function() {
@@ -33,18 +38,14 @@ var OrderTable = React.createClass({
 					<tbody>
 						{
 							this.props.items.map(function(item, index) {
-								var style = self.state.selected.includes(index) ? "selected" : "";
 								return (
-									<tr className={style} onClick={self.handleClick.bind(self, index)}>
-										<td>{item.name}</td>
-										<td>{self.props.cashSign + item.price.toFixed(2)}</td>
-									</tr>
+									<OrderItem item={item} cashSign={self.props.cashSign} onOrderClick={self.handleClick} />
 								);
 							})	
 						}
 						<tr className='total'>
 							<td>Total</td>
-							<td>{this.calTotal()}</td>
+							<td>{'$' + this.state.total.toFixed(2)}</td>
 						</tr>
 					</tbody>
 				</table>
